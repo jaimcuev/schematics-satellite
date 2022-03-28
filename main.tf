@@ -7,8 +7,8 @@ data ibm_is_image "image_vm" {
 }
 
 resource "ibm_is_instance" "vpc_cloudpak_vsi" {
-  count = length(var.zones)
-  name = "vm-${var.project}-cp-${var.environment}-${format("%02s", count.index)}"
+  count = length(var.cloudpak_zones_vsi)
+  name = "vm-${var.project}-cp-${var.environment}-${format("%03s", count.index + 1)}"
   image = data.ibm_is_image.image_vm.id
   profile = var.cloudpak_profile
   resource_group = data.ibm_resource_group.resourceGroup.id
