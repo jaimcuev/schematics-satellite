@@ -1,8 +1,3 @@
-variable "ibmcloud_api_key" {
-  default = ""
-  description = "IBM Cloud API key requerido para crear componentes"
-}
-
 variable "resource_group_name" {
   default = ""
   description = "Nombre del resource group donde se desea crear los recursos"
@@ -94,4 +89,9 @@ variable "odf_zones_vsi" {
   type = list
   default = ["us-south-1", "us-south-2", "us-south-3"]
   description = "Zona para cada VSI a crear para el Openshift Data Foundation"
+}
+
+variable "satellite_attach_file" {
+  default = ""
+  description = "Attachment file de la VSI para Satellite en Base64"
 }
