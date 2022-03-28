@@ -5,7 +5,7 @@ resource "ibm_is_vpc" "vpc_vm" {
 }
 
 resource ibm_is_subnet "vpc_subnet" {
-  count = 3
+  count = length(var.zones)
   name = "subnet-${var.project}-${var.environment}-00${count.index + 1}"
   vpc  = ibm_is_vpc.vpc_vm.id
   zone = var.zones[count.index]
