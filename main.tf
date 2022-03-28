@@ -22,7 +22,7 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   }
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.controlplane_zones_vsi[count.index]
-  keys = var.key
+  keys = var.rehl_key
   tags = var.tags
   user_data = <<-EOUD
             #!/bin/bash
@@ -57,7 +57,7 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.cloudpak_zones_vsi[count.index]
   volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
-  keys = var.key
+  keys = var.rehl_key
   tags = var.tags
   user_data = <<-EOUD
           #!/bin/bash
@@ -95,7 +95,7 @@ resource "ibm_is_instance" "vpc_odf_vsi" {
     ibm_is_volume.vpc_odf_1_volume[count.index].id, 
     ibm_is_volume.vpc_odf_2_volume[count.index].id
   ]
-  keys = var.key
+  keys = var.rehl_key
   tags = var.tags
   user_data = <<-EOUD
         #!/bin/bash
@@ -116,3 +116,24 @@ resource "ibm_is_instance" "vpc_odf_vsi" {
     delete = "15m"
   }
 }
+
+resource "ibm_is_instance" "vpc_windows_vsi" {
+  name = "vm-${var.project}-windows-${var.environment}-001"
+  image = "r006-4f5c3043-976d-4a86-a4f2-b3deee68f392"
+  profile = "bx2-2x8"
+  resource_group = data.ibm_resource_group.resourceGroup.id
+  primary_network_interface {
+    subnet = ibm_is_subnet.vpc_subnet[0].id
+    allow_ip_spoofing = false
+  }
+  vpc = ibm_is_vpc.vpc_vm.id
+  zone = var.zones[0]
+  keys = var.windows_key
+  tags = var.tags
+  timeouts {
+    create = "15m"
+    update = "15m"
+    delete = "15m"
+  }
+}
+

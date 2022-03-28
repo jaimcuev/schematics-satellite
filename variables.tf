@@ -46,10 +46,16 @@ variable "image" {
   description = "Imagen que se usara para la VSI"
 }
 
-variable "key" {
+variable "rehl_key" {
   type = list
   default = [""]
-  description = "ID Keys"
+  description = "REHL ID Keys"
+}
+
+variable "windows_key" {
+  type = list
+  default = [""]
+  description = "Windows ID Keys"
 }
 
 variable "controlplane_profile" {
