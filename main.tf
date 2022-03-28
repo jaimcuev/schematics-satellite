@@ -13,7 +13,7 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   profile = var.cloudpak_profile
   resource_group = data.ibm_resource_group.resourceGroup.id
   primary_network_interface {
-    subnet = ibm_is_subnet.vpc_subnet[count.index].id
+    subnet = ibm_is_subnet.vpc_subnet[index(ibm_is_subnet.vpc_subnet.*.zone, var.cloudpak_zones_vsi[count.index])].id
     allow_ip_spoofing = false
   }
   vpc = ibm_is_vpc.vpc_vm.id
@@ -21,9 +21,4 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   keys = var.key
   volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
   tags = var.tags
-  timeouts {
-    create = "15m"
-    update = "15m"
-    delete = "15m"
-  }
 }
