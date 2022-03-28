@@ -83,7 +83,7 @@ resource "ibm_is_instance" "vpc_odf_vsi" {
   count = length(var.odf_zones_vsi)
   name = "vm-${var.project}-odf-${var.environment}-${format("%03s", count.index + 1)}"
   image = data.ibm_is_image.image_vm.id
-  profile = var.cloudpak_profile
+  profile = var.odf_profile
   resource_group = data.ibm_resource_group.resourceGroup.id
   primary_network_interface {
     subnet = ibm_is_subnet.vpc_subnet[index(ibm_is_subnet.vpc_subnet.*.zone, var.odf_zones_vsi[count.index])].id
