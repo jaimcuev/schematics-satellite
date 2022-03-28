@@ -14,6 +14,7 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   resource_group = data.ibm_resource_group.resourceGroup.id
   primary_network_interface {
     subnet = ibm_is_subnet.vpc_subnet[count.index].id
+    allow_ip_spoofing = false
   }
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.zones[count.index]
@@ -40,10 +41,9 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   resource_group = data.ibm_resource_group.resourceGroup.id
   primary_network_interface {
     subnet = ibm_is_subnet.vpc_subnet[count.index].id
+    allow_ip_spoofing = false
   }
-  volume_attachments {
-    name = ibm_is_volume.vpc_cloudpak_volume[count.index].id
-  }
+  volumes = [ ibm_is_volume.vpc_cloudpak_volume[count.index].id ]
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.zones[count.index]
   keys = var.key
