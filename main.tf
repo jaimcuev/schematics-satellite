@@ -59,7 +59,7 @@ resource "ibm_is_instance" "vpc_odf_vsi" {
   }
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.odf_zones_vsi[count.index]
-  volumes = [ibm_is_volume.vpc_odf_1_volume[count.index].id]
+  volumes = [ibm_is_volume.vpc_odf_1_volume[count.index].id,ibm_is_volume.vpc_odf_2_volume[count.index].id]
   keys = var.rehl_key
   tags = var.tags
   user_data = <<-EOUD
