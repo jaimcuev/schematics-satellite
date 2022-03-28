@@ -29,32 +29,14 @@ variable "environment" {
   description = "Ambiente para el cual se crea el cluster"
 }
 
-variable "zone_1" {
-  default = "us-south-1"
-  description = "Zona 1 donde se crearan los recursos"
+variable "zones" {
+  type = list
+  default = ["us-south-1", "us-south-2", "us-south-3"]
+  description = "Zonas donde se crearan los recursos"
 }
 
-variable "zone_2" {
-  default = "us-south-2"
-  description = "Zona 2 donde se crearan los recursos"
-}
-
-variable "zone_3" {
-  default = "us-south-3"
-  description = "Zona 3 donde se crearan los recursos"
-}
-
-variable "cdir_1" {
-  default = "10.240.0.0/18"
-  description = "Rango de IPs para la zona 1"
-}
-
-variable "cdir_2" {
-  default = "10.240.64.0/18"
-  description = "Rango de IPs para la zona 2"
-}
-
-variable "cdir_3" {
-  default = "10.240.128.0/18"
-  description = "Rango de IPs para la zona 3"
+variable "cdirs" {
+  type = list
+  default = ["10.240.0.0/18", "10.240.64.0/18", "10.240.128.0/18"]
+  description = "Rango de IPs por zona"
 }
