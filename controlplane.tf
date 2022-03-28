@@ -1,7 +1,7 @@
 resource "ibm_is_instance" "vpc_controlplane_vsi" {
   count = length(var.controlplane_zones_vsi)
   
-  name = "vm-${var.project}-${var.environment}-cp-${format("%03s", count.index + 1)}"
+  name = "vm-${var.project}-cp-${var.environment}-${format("%03s", count.index + 1)}"
   image = data.ibm_is_image.image_vm.id
   profile = var.controlplane_profile
   resource_group = data.ibm_resource_group.resourceGroup.id
