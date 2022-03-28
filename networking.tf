@@ -7,7 +7,7 @@ resource "ibm_is_vpc" "vpc_vm" {
 resource "ibm_is_public_gateway" "vpc_gateway" {
   count = length(var.zones)
   name = "gateway-${var.project}-${var.environment}-00${count.index + 1}"
-  vpc  = ibm_is_vpc.example.id
+  vpc  = ibm_is_vpc.vpc_vm.id
   zone = var.zones[count.index]
 }
 
