@@ -78,3 +78,14 @@ variable "cloudpak_storage_capacity" {
   default = "100"
   description = "Capacidad de almacenamiento para cada VSI"
 }
+
+variable "odf_profile" {
+  default = "bx2-16x64"
+  description = "Profile de la VSI para el Openshift Data Foundation"
+}
+
+variable "odf_zones_vsi" {
+  type = list
+  default = ["us-south-1", "us-south-2", "us-south-3"]
+  description = "Zona para cada VSI a crear para el Openshift Data Foundation"
+}
