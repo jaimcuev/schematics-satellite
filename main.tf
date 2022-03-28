@@ -59,19 +59,6 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
   keys = var.key
   tags = var.tags
-  user_data = <<-EOUD
-          #!/bin/bash
-          echo '${data.local_file.reregister_vsi.content_base64}' | base64 --decode > /tmp/reregister-ng-rhel-vsi.sh
-          cd /tmp
-          chmod +x reregister-ng-rhel-vsi.sh
-          ./reregister-ng-rhel-vsi.sh
-          subscription-manager refresh
-          subscription-manager repos --enable rhel-server-rhscl-7-rpms
-          subscription-manager repos --enable rhel-7-server-optional-rpms
-          subscription-manager repos --enable rhel-7-server-rh-common-rpms
-          subscription-manager repos --enable rhel-7-server-supplementary-rpms
-          subscription-manager repos --enable rhel-7-server-extras-rpms &
-          EOUD
   timeouts {
     create = "15m"
     update = "15m"
