@@ -73,3 +73,8 @@ variable "cloudpak_zones_vsi" {
   default = ["us-south-2", "us-south-2", "us-south-3"]
   description = "Zona para cada VSI a crear para el Cloud Pak"
 }
+
+variable "cloudpak_storage_capacity" {
+  default = "100"
+  description = "Capacidad de almacenamiento para cada VSI"
+}
