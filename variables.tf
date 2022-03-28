@@ -56,3 +56,8 @@ variable "controlplane_profile" {
   default = "bx2-4x16"
   description = "Profile de la VSI para el Control Plane"
 }
+
+variable "cp_profile" {
+  default = "gx2-8x64x1v100"
+  description = "Profile de la VSI para el Cloud Pak"
+}
