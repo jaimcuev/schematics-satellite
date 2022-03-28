@@ -24,21 +24,6 @@ resource "ibm_is_instance" "vpc_controlplane_vsi" {
   zone = var.controlplane_zones_vsi[count.index]
   keys = var.rehl_key
   tags = var.tags
-  user_data = <<-EOUD
-            #!/bin/bash
-            echo '${data.local_file.reregister_vsi.content_base64}' | base64 --decode > /tmp/reregister-ng-rhel-vsi.sh
-            echo '${var.satellite_attach_file}' | base64 --decode > /tmp/attachHost-satellite-location.sh
-            cd /tmp
-            chmod +x reregister-ng-rhel-vsi.sh
-            ./reregister-ng-rhel-vsi.sh
-            subscription-manager refresh
-            subscription-manager repos --enable rhel-server-rhscl-7-rpms
-            subscription-manager repos --enable rhel-7-server-optional-rpms
-            subscription-manager repos --enable rhel-7-server-rh-common-rpms
-            subscription-manager repos --enable rhel-7-server-supplementary-rpms
-            subscription-manager repos --enable rhel-7-server-extras-rpms
-            sudo nohup bash /tmp/attachHost-satellite-location.sh &
-            EOUD
   timeouts {
     create = "15m"
     update = "15m"
@@ -61,21 +46,6 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
   keys = var.rehl_key
   tags = var.tags
-  user_data = <<-EOUD
-          #!/bin/bash
-          echo '${data.local_file.reregister_vsi.content_base64}' | base64 --decode > /tmp/reregister-ng-rhel-vsi.sh
-          echo '${var.satellite_attach_file}' | base64 --decode > /tmp/attachHost-satellite-location.sh
-          cd /tmp
-          chmod +x reregister-ng-rhel-vsi.sh
-          ./reregister-ng-rhel-vsi.sh
-          subscription-manager refresh
-          subscription-manager repos --enable rhel-server-rhscl-7-rpms
-          subscription-manager repos --enable rhel-7-server-optional-rpms
-          subscription-manager repos --enable rhel-7-server-rh-common-rpms
-          subscription-manager repos --enable rhel-7-server-supplementary-rpms
-          subscription-manager repos --enable rhel-7-server-extras-rpms
-          sudo nohup bash /tmp/attachHost-satellite-location.sh &
-          EOUD
   timeouts {
     create = "15m"
     update = "15m"
@@ -101,21 +71,6 @@ resource "ibm_is_instance" "vpc_odf_vsi" {
   ]
   keys = var.rehl_key
   tags = var.tags
-  user_data = <<-EOUD
-        #!/bin/bash
-        echo '${data.local_file.reregister_vsi.content_base64}' | base64 --decode > /tmp/reregister-ng-rhel-vsi.sh
-        echo '${var.satellite_attach_file}' | base64 --decode > /tmp/attachHost-satellite-location.sh
-        cd /tmp
-        chmod +x reregister-ng-rhel-vsi.sh
-        ./reregister-ng-rhel-vsi.sh
-        subscription-manager refresh
-        subscription-manager repos --enable rhel-server-rhscl-7-rpms
-        subscription-manager repos --enable rhel-7-server-optional-rpms
-        subscription-manager repos --enable rhel-7-server-rh-common-rpms
-        subscription-manager repos --enable rhel-7-server-supplementary-rpms
-        subscription-manager repos --enable rhel-7-server-extras-rpms
-        sudo nohup bash /tmp/attachHost-satellite-location.sh &
-        EOUD
   timeouts {
     create = "15m"
     update = "15m"

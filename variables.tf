@@ -95,8 +95,3 @@ variable "odf_zones_vsi" {
   default = ["us-south-1", "us-south-2", "us-south-3"]
   description = "Zona para cada VSI a crear para el Openshift Data Foundation"
 }
-
-variable "satellite_attach_file" {
-  default = ""
-  description = "Attachment file de la VSI para Satellite en Base64"
-}
