@@ -6,6 +6,10 @@ resource "ibm_is_volume" "vpc_cloudpak_volume" {
   resource_group = data.ibm_resource_group.resourceGroup.id
   zone = var.cloudpak_zones_vsi[count.index]
   tags = var.tags
+  timeouts {
+    create = "15m"
+    delete = "15m"
+  }
 }
 
 resource "ibm_is_volume" "vpc_odf_1_volume" {
@@ -16,6 +20,10 @@ resource "ibm_is_volume" "vpc_odf_1_volume" {
   resource_group = data.ibm_resource_group.resourceGroup.id
   zone = var.odf_zones_vsi[count.index]
   tags = var.tags
+  timeouts {
+    create = "15m"
+    delete = "15m"
+  }
 }
 
 resource "ibm_is_volume" "vpc_odf_2_volume" {
@@ -26,4 +34,8 @@ resource "ibm_is_volume" "vpc_odf_2_volume" {
   resource_group = data.ibm_resource_group.resourceGroup.id
   zone = var.odf_zones_vsi[count.index]
   tags = var.tags
+  timeouts {
+    create = "15m"
+    delete = "15m"
+  }
 }
