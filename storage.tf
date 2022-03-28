@@ -5,5 +5,4 @@ resource "ibm_is_volume" "vpc_cloudpak_volume" {
   capacity = 100
   resource_group = data.ibm_resource_group.resourceGroup.id
   zone = var.zones[count.index]
-  tags = var.tags
 }
