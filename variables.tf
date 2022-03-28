@@ -57,7 +57,19 @@ variable "controlplane_profile" {
   description = "Profile de la VSI para el Control Plane"
 }
 
-variable "cp_profile" {
+variable "controlplane_zones_vsi" {
+  type = list
+  default = ["us-south-1", "us-south-2", "us-south-3"]
+  description = "Zona para cada VSI a crear para el Control Plane"
+}
+
+variable "cloudpak_profile" {
   default = "gx2-8x64x1v100"
   description = "Profile de la VSI para el Cloud Pak"
+}
+
+variable "cloudpak_zones_vsi" {
+  type = list
+  default = ["us-south-2", "us-south-2", "us-south-3"]
+  description = "Zona para cada VSI a crear para el Cloud Pak"
 }
