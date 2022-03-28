@@ -9,6 +9,7 @@ resource "ibm_is_public_gateway" "vpc_gateway" {
   name = "gateway-${var.project}-${var.environment}-00${count.index + 1}"
   vpc  = ibm_is_vpc.vpc_vm.id
   zone = var.zones[count.index]
+  resource_group = data.ibm_resource_group.resourceGroup.id
 }
 
 resource ibm_is_subnet "vpc_subnet" {
