@@ -40,3 +40,19 @@ variable "cdirs" {
   default = ["10.240.0.0/18", "10.240.64.0/18", "10.240.128.0/18"]
   description = "Rango de IPs por zona"
 }
+
+variable "image" {
+  default = "ibm-redhat-7-9-minimal-amd64-5"
+  description = "Imagen que se usara para la VSI"
+}
+
+variable "key" {
+  type = list
+  default = [""]
+  description = "ID Keys"
+}
+
+variable "controlplane_profile" {
+  default = "bx2-4x16"
+  description = "Profile de la VSI para el Control Plane"
+}
