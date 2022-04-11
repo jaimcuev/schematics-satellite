@@ -13,7 +13,7 @@ resource "ibm_is_instance" "vpc_cloudpak_vsi" {
   
   vpc = ibm_is_vpc.vpc_vm.id
   zone = var.cloudpak_zones_vsi[count.index]
-  #volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
+  volumes = [ibm_is_volume.vpc_cloudpak_volume[count.index].id]
   keys = var.rehl_key
   tags = var.tags
   
